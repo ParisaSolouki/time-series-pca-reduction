@@ -62,15 +62,18 @@ This helps evaluate how well different ECG classes are separable in reduced-dime
 ---
 
 ## 🗂️ Project Structure
+
+```
 time-series-pca-reduction/
 │
 ├── notebooks/
-│ └── ECG_Applying_PCA.ipynb
+│   └── ECG_Applying_PCA.ipynb
 │
 ├── src/
-│ └── pca_analysis.py
+│   └── pca_analysis.py
 │
 └── README.md
+```
 ---
 
 ## ▶️ How to Run
