@@ -16,8 +16,6 @@ listNames = glob.glob(f"{DATA_DIR}/*.dat")
 
 if not listNames:
     raise SystemExit("No ECG files found. Check DATA_DIR path in src/pca_analysis.py")
-else:
-    print(f"Processing {len(listNames)} files.")
 
 
 # -------------------------
@@ -56,7 +54,7 @@ RIGHT = 120
 
 for name in listNames:
     recordName = name.partition(".")[0]
-    print(f"Processing record: {recordName}")
+    # print(f"Processing record: {recordName}")
 
     sig, fields = wfdb.rdsamp(record_name=recordName)
 
