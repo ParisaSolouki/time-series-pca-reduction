@@ -1,25 +1,39 @@
 # Dimensionality Reduction on ECG Time-Series using PCA
 
-## 📌 Project Overview
+## Project Overview
 
 This project applies **Principal Component Analysis (PCA)** to high-dimensional ECG time-series data from the MIT-BIH Arrhythmia Database.
 
-The goal is to:
-- Segment ECG signals around R-peaks
-- Extract QRS complexes
-- Reduce dimensionality using PCA
-- Visualize class separability in low-dimensional space
+Each QRS complex consists of 200 time samples, resulting in a high-dimensional feature space.  
+PCA is used to:
+
+- Reduce dimensionality
+- Analyze variance distribution
+- Visualize class separability
+- Understand intrinsic structure of ECG patterns
+
+Although the dataset is biomedical, the core focus is on **time-series feature engineering and dimensionality reduction techniques** commonly used in data analytics.
 
 ---
 
-## 📂 Dataset
+## Objectives
 
-Dataset used:
-MIT-BIH Arrhythmia Database
+- Segment ECG signals around annotated R-peaks
+- Extract fixed-length QRS complexes
+- Apply PCA for dimensionality reduction
+- Analyze cumulative explained variance
+- Visualize class separability in reduced feature space
 
-Each ECG signal is:
+---
+
+## Dataset
+
+**MIT-BIH Arrhythmia Database**
+
+Each ECG record is:
+
 - Filtered using Butterworth high-pass and low-pass filters
-- Segmented around annotated R-peaks
+- Segmented around R-peaks
 - Categorized into five heartbeat classes:
 
 | Label | Description |
@@ -32,38 +46,49 @@ Each ECG signal is:
 
 ---
 
-## ⚙️ Methodology
+## Methodology
 
-### 1️⃣ Signal Preprocessing
+### 1. Signal Preprocessing
 - Sampling frequency: 360 Hz
 - High-pass filter: 0.5 Hz
 - Low-pass filter: 20 Hz
-- Butterworth filters (3rd order)
+- 3rd-order Butterworth filters
 
-### 2️⃣ Segmentation
-Each QRS complex is extracted using a window:
+### 2. Segmentation
+Each QRS complex is extracted using:
 - 80 samples before R-peak
-- 120 samples after R-peak
+- 120 samples after R-peak  
+→ Total: **200-dimensional feature vector**
 
-### 3️⃣ Dimensionality Reduction
-- PCA with 60 components
-- Data concatenated across classes
-- PCA fitted on full dataset
+### 3. Dimensionality Reduction (PCA)
+
+- PCA applied with 60 components
+- Model fitted on the full concatenated dataset
 - Features transformed per class
 
+### Explained Variance Analysis
+
+- Cumulative explained variance is computed
+- With 60 components, nearly 100% variance is retained
+- Demonstrates strong redundancy in raw time-series features
+
+This validates PCA as an effective compression technique for ECG signals.
+
 ---
 
-## 📊 PCA Visualization
+## Visualization
 
-The first two principal components are plotted to visualize class distribution.
+The first two principal components are plotted to evaluate:
 
-This helps evaluate how well different ECG classes are separable in reduced-dimensional space.
+- Cluster separation between heartbeat classes
+- Structural differences in signal morphology
+- Potential classification boundaries
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
-```
+```text
 time-series-pca-reduction/
 │
 ├── notebooks/
@@ -74,4 +99,3 @@ time-series-pca-reduction/
 │
 └── README.md
 ```
----
