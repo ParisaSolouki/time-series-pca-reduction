@@ -75,12 +75,3 @@ time-series-pca-reduction/
 └── README.md
 ```
 ---
-
-## ▶️ How to Run
-
-Clone the repository:
-
-```bash
-git clone https://github.com/ParisaSolouki/time-series-pca-reduction.git
-cd time-series-pca-reduction
-```
