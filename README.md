@@ -1,80 +1,83 @@
-# Dimensionality Reduction on High-Dimensional Time-Series Data using PCA
+# Dimensionality Reduction on ECG Time-Series using PCA
 
-## Overview
-This project demonstrates an end-to-end workflow for transforming high-dimensional time-series segments into a lower-dimensional feature space using Principal Component Analysis (PCA).
+## 📌 Project Overview
 
-Although the source data consists of ECG time-series segments, the primary focus of this project is on:
-- Feature structuring
-- Dimensionality reduction
-- Variance preservation
-- Visualization of separability in feature space
+This project applies **Principal Component Analysis (PCA)** to high-dimensional ECG time-series data from the MIT-BIH Arrhythmia Database.
 
-These techniques are directly transferable to general data analytics and machine learning workflows.
-
----
-
-## Objective
-To reduce high-dimensional segmented time-series data into a compact representation while preserving the most significant variance patterns.
+The goal is to:
+- Segment ECG signals around R-peaks
+- Extract QRS complexes
+- Reduce dimensionality using PCA
+- Visualize class separability in low-dimensional space
 
 ---
 
-## Workflow
+## 📂 Dataset
 
-### 1. Data Preparation
-- Load raw time-series files and annotations
-- Segment time-series windows around key events
-- Structure segments into a matrix format suitable for analysis
+Dataset used:
+MIT-BIH Arrhythmia Database
 
-### 2. Preprocessing
-- Apply bandpass filtering to reduce noise
-- Standardize segments before PCA transformation
+Each ECG signal is:
+- Filtered using Butterworth high-pass and low-pass filters
+- Segmented around annotated R-peaks
+- Categorized into five heartbeat classes:
 
-### 3. PCA Application
-- Fit PCA model on structured segments
-- Reduce dimensionality to 60 principal components
-- Analyze explained variance ratio
-- Transform each segment into reduced feature space
-
-### 4. Visualization
-- Plot principal component projections (PC1 vs PC2)
-- Assess clustering and separability patterns
-- Compare variance distribution across components
+| Label | Description |
+|-------|------------|
+| N | Normal beats |
+| S | Supraventricular beats |
+| F | Fusion beats |
+| V | Ventricular beats |
+| U | Unknown beats |
 
 ---
 
-## Key Results (to be completed with actual values)
-- The first X components preserve approximately Y% of total variance.
-- Clear separation patterns are observed in the first two principal components.
-- Dimensionality reduced from N dimensions to 60 components.
+## ⚙️ Methodology
+
+### 1️⃣ Signal Preprocessing
+- Sampling frequency: 360 Hz
+- High-pass filter: 0.5 Hz
+- Low-pass filter: 20 Hz
+- Butterworth filters (3rd order)
+
+### 2️⃣ Segmentation
+Each QRS complex is extracted using a window:
+- 80 samples before R-peak
+- 120 samples after R-peak
+
+### 3️⃣ Dimensionality Reduction
+- PCA with 60 components
+- Data concatenated across classes
+- PCA fitted on full dataset
+- Features transformed per class
 
 ---
 
-## Why This Matters
-Dimensionality reduction is critical when working with:
-- High-dimensional structured datasets
-- Time-series feature matrices
-- Large-scale behavioral or sensor data
+## 📊 PCA Visualization
 
-PCA improves:
-- Computational efficiency
-- Noise reduction
-- Feature interpretability
-- Visualization clarity
+The first two principal components are plotted to visualize class distribution.
+
+This helps evaluate how well different ECG classes are separable in reduced-dimensional space.
 
 ---
 
-## Tech Stack
-- Python
-- NumPy
-- SciPy
-- scikit-learn
-- Matplotlib
-- wfdb
-
+## 🗂️ Project Structure
+time-series-pca-reduction/
+│
+├── notebooks/
+│ └── ECG_Applying_PCA.ipynb
+│
+├── src/
+│ └── pca_analysis.py
+│
+└── README.md
 ---
 
-## Future Improvements
-- Add variance explained plot
-- Compare PCA with alternative reduction techniques
-- Export transformed features for downstream modeling
+## ▶️ How to Run
 
+Clone the repository:
+
+```bash
+git clone https://github.com/ParisaSolouki/time-series-pca-reduction.git
+cd time-series-pca-reduction
+```
